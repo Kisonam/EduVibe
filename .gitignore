@@ -1,0 +1,122 @@
+# .NET Specific
+
+# ASP.NET Web API output
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.dbmdl
+*.log
+*.vspscc
+*.vssscc
+project.lock.json
+project.fragment.lock.json
+artifacts/
+.nuget/
+*.nupkg
+*.psess
+
+# User-specific files
+*.rsuser
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# ASP.NET Scaffolding related
+.scaffolding/
+
+# Auto-generated files
+*.generated.cs
+
+# Resharper files
+_ReSharper*/
+*.DotSettings.user
+
+# Rider IDE
+.idea/
+.idea_modules/
+
+# Logs
+*.log
+logs/
+
+# Angular Specific
+
+# Node modules
+node_modules/
+
+# Angular build output
+dist/
+out-tsc/
+.angular/
+
+# Temporary or backup files
+*.bak
+*.swp
+*.tmp
+*.log
+*.cache
+
+# Generated from TypeScript definition files
+*.d.ts
+
+# Compiled JavaScript and TypeScript files
+*.js
+*.js.map
+
+# Compiled CSS
+*.css
+*.css.map
+
+# Generated Angular files
+*.ngfactory.ts
+*.ngstyle.ts
+
+# Testing
+coverage/
+e2e/*.js
+e2e/*.js.map
+e2e/*.ts
+*.lcov
+
+# Package manager lock files
+npm-debug.log*
+yarn.lock
+pnpm-lock.yaml
+
+# Editor-specific files
+.vscode/
+.vscode/*
+.idea/
+.idea_modules/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Operating System Specific
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+**/.Spotlight-V100
+**/.Trashes
+**/._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Backup files
+*.bak
+~$*
+
+# Misc
+.env
+# System files
+*.DS_Store
+Thumbs.db
