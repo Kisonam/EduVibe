@@ -86,3 +86,4 @@ resharper.xml
 *.nupkg
 .nuget/
 
+*.DS_Store
