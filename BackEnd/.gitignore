@@ -1,0 +1,88 @@
+# ASP.NET Web API specific ignores
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore build results
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding related
+.scaffolding/
+
+# Visual Studio Code
+.vscode/
+.vscode/*
+
+# Rider IDE
+.idea/
+.idea/*
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userprefs
+
+# Auto-generated files
+*.generated.cs
+*.generated.ts
+*.generated.js
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows specific files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS hidden folders
+**/.Spotlight-V100
+**/.Trashes
+**/._*
+
+# Backup files
+*.bak
+*.swp
+*.swx
+
+# Logs
+*.log
+logs/
+*.log
+*.tlg
+*.tsf
+
+# Package manager folders
+node_modules/
+npm-debug.log
+yarn.lock
+*.nuget/
+
+# JetBrains Rider logs
+.idea/
+.idea_modules/
+.idea/workspace.xml
+.idea/gradle.xml
+.idea/libraries/
+.idea/tasks.xml
+
+# Temporary files
+~$*
+
+# Resharper files
+_ReSharper*/
+*.DotSettings.user
+resharper.xml
+
+# NuGet
+*.nupkg
+.nuget/
+
