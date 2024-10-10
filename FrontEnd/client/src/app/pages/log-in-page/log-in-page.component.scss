@@ -1,0 +1,56 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e8f0; /* Цвет фона */
+    padding: 2rem;
+    width: 300px;
+    border: 1px solid #c0c7d1;
+    border-radius: 5px;
+    margin: 40vh auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .input-container {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #d9e5f0; /* Светлый фон для полей */
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #6b6b6b;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #6b4f57;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+  
+  .login-button:hover {
+    background-color: #5a414c; /* Изменение цвета при наведении */
+  }
+  

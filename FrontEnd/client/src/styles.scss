@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+$primary-color: #7B7C81;
+$background-color: #D4DBE2;
+$text-color: #1D0F0F;
+
+
+html{
+    margin: 0;
+  background-color: $background-color;
+  color: $text-color;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 900;
+}

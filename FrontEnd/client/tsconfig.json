@@ -3,6 +3,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@nav-bar-main/*": ["nav-bar-main/*"]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
@@ -24,6 +28,11 @@
       "dom"
     ]
   },
+  "include": [
+    "src/**/*",
+    "node_modules/**/*",
+    "src/app/nav-bar-main/nav-bar-main.component.ts"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

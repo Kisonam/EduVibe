@@ -1,0 +1,28 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <img [src]="logoPath" alt="Logo">
+  </div>
+  <div class="navbar-search">
+    <input type="search" placeholder="Search for new knowledge">
+    <button type="submit">Go</button>
+  </div>
+  <div class="navbar-categories" tabindex="0">
+    Categories
+    <!--<ul>
+      <li>Music</li>
+      <li>Videos</li>
+      <li>Images</li>
+      <li>Articles</li>
+    </ul> -->
+  </div>
+  <a href="#" class="navbar-link">For creators</a>
+  <div class="navbar-actions">
+
+    <button (click)="navigateToSignUp()" class="button" id="sign-up-button" >Sign up</button>
+
+    <button class="button" (click)="navigateToLogin()">Log in</button>
+
+
+    <button class="button">Language</button>
+  </div>
+</nav>
