@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { LogInPageComponent } from "../../log-in-page/log-in-page.component";
 import { NavBarMainComponent } from "../../../nav-bar-main/nav-bar-main.component";
+import { ProfileRedactComponent } from "../../profile-redact/profile-redact.component";
 
 
 
@@ -9,7 +10,7 @@ import { NavBarMainComponent } from "../../../nav-bar-main/nav-bar-main.componen
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LogInPageComponent, NavBarMainComponent],
+  imports: [RouterOutlet, LogInPageComponent, NavBarMainComponent, ProfileRedactComponent],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })

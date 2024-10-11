@@ -1,0 +1,69 @@
+<app-nav-bar-main></app-nav-bar-main>
+
+<div class="profile-edit">
+    <!-- Basics Section -->
+    <div class="section">
+      <h3>Basics:</h3>
+      <form>
+        <label for="first-name">First Name</label>
+        <input type="text" id="first-name" placeholder="First Name" value="">
+  
+        <label for="last-name">Last Name</label>
+        <input type="text" id="last-name" placeholder="Last Name" value="">
+  
+        <label for="headline">Headline</label>
+        <input type="text" id="headline" placeholder="Headline">
+        <span class="character-limit">60</span>
+        <p class="subtext">Add a professional headline like, "Instructor at EduVibe" or "Architect"</p>
+  
+        <label for="description">Description</label>
+        <textarea id="description" placeholder="Description"></textarea>
+        <p class="subtext">Links and coupon codes are not permitted in this section</p>
+  
+        <label for="language">Language</label>
+        <select id="language">
+          <option value="en">English (US)</option>
+          <!-- other language options -->
+        </select>
+      </form>
+    </div>
+  
+    <!-- Links Section -->
+    <div class="section">
+      <h3>Links:</h3>
+  
+      <label for="website">Website</label>
+      <input type="url" id="website" placeholder="Website (http(s)://..)">
+  
+      <label for="twitter">Twitter Profile</label>
+      <div class="input-group">
+        <span>http://twitter.com/</span>
+        <input type="text" id="twitter" placeholder="Twitter Profile">
+      </div>
+      <p class="subtext">Add your Twitter username (e.g. johnsmith).</p>
+  
+      <label for="facebook">Facebook Profile</label>
+      <div class="input-group">
+        <span>http://www.facebook.com/</span>
+        <input type="text" id="facebook" placeholder="Facebook Profile">
+      </div>
+      <p class="subtext">Input your Facebook username (e.g. johnsmith).</p>
+  
+      <label for="linkedin">LinkedIn Profile</label>
+      <div class="input-group">
+        <span>http://www.linkedin.com/</span>
+        <input type="text" id="linkedin" placeholder="LinkedIn Profile">
+      </div>
+      <p class="subtext">Input your LinkedIn resource id (e.g. in/johnsmith).</p>
+  
+      <label for="youtube">YouTube Profile</label>
+      <div class="input-group">
+        <span>http://www.youtube.com/</span>
+        <input type="text" id="youtube" placeholder="YouTube Profile">
+      </div>
+      <p class="subtext">Input your YouTube username (e.g. johnsmith).</p>
+    </div>
+  
+    <button type="submit" class="save-button">Save</button>
+  </div>
+  
