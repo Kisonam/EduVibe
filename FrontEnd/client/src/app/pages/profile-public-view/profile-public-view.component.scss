@@ -1,0 +1,33 @@
+.profile-view {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+    }   
+    .section {
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+
+.avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    
+    .avatar-preview {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+  }

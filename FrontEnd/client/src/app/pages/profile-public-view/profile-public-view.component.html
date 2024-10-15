@@ -1,0 +1,16 @@
+<app-nav-bar-main></app-nav-bar-main>
+
+<div class="profile-view">
+    <div class="avatar-section">
+        <h3>Avatar</h3>
+      
+        <!-- Превью аватарки: если есть обрезанное изображение - показываем его, иначе показываем изображение по умолчанию -->
+        <img class="avatar-preview" alt="Avatar Preview">
+      
+        <!-- Default avatar preview -->
+        <ng-template #defaultAvatar>
+          <img src="default-avatar.svg" class="avatar-preview" alt="Default Avatar">
+        </ng-template>
+    </div>
+
+</div>

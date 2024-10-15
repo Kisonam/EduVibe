@@ -3,6 +3,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { LogInPageComponent } from "../../log-in-page/log-in-page.component";
 import { NavBarMainComponent } from "../../../nav-bar-main/nav-bar-main.component";
 import { ProfileRedactComponent } from "../../profile-redact/profile-redact.component";
+import { ProfilePublicViewComponent } from "../../profile-public-view/profile-public-view.component";
 
 
 
@@ -10,7 +11,7 @@ import { ProfileRedactComponent } from "../../profile-redact/profile-redact.comp
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LogInPageComponent, NavBarMainComponent, ProfileRedactComponent],
+  imports: [RouterOutlet, LogInPageComponent, NavBarMainComponent, ProfileRedactComponent, ProfilePublicViewComponent],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })
