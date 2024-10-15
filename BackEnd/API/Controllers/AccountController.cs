@@ -1,29 +1,85 @@
+using Microsoft.AspNetCore.Mvc;
+using API.DTOs;
+using API.Entities;
+using API.Interfaces;
+using API.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
-using API.Data;
-using API.Entities;
-using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers;
-
-public class AccountController(DataContext context) : BaseApiController
+namespace API.Controllers
 {
-    [HttpPost("register")] // api/account/register
-    public async Task<ActionResult<AppUser>> Register(string username, string password)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class AccountController : ControllerBase
     {
-        using var hmac = new HMACSHA512();
+        private readonly DataContext _context;
+        private readonly ITokenService _tokenService;
 
-        var user = new AppUser
+        public AccountController(DataContext context, ITokenService tokenService)
         {
-            UserName = username,
-            PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password)),
-            PasswordSalt = hmac.Key
-        };
+            _context = context;
+            _tokenService = tokenService;
+        }
 
-        context.Users.Add(user);
+        [HttpPost("register")]
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+        {
+            // Check if the username already exists
+            if (await UserExists(registerDto.Username))
+                return BadRequest("Username is taken");
 
-        await context.SaveChangesAsync();
+            // Create a new user with hashed password
+            using var hmac = new HMACSHA512();
 
-        return user;
+            var user = new AppUser
+            {
+                UserName = registerDto.Username.ToLower(),
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
+                PasswordSalt = hmac.Key
+            };
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return new UserDto
+            {
+                Username = user.UserName,
+                Token = _tokenService.CreateToken(user)
+            };
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        {
+            // Retrieve the user from the database
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
+
+            if (user == null)
+                return Unauthorized("Invalid username");
+
+            // Verify the password
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+
+            for (int i = 0; i < computedHash.Length; i++)
+            {
+                if (computedHash[i] != user.PasswordHash[i])
+                    return Unauthorized("Invalid password");
+            }
+
+            return new UserDto
+            {
+                Username = user.UserName,
+                Token = _tokenService.CreateToken(user)
+            };
+        }
+
+        // Helper method to check if a username already exists
+        private async Task<bool> UserExists(string username)
+        {
+            return await _context.Users.AnyAsync(x => x.UserName == username.ToLower());
+        }
     }
 }
