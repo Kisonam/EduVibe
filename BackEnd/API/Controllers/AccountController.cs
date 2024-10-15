@@ -6,6 +6,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -22,21 +23,22 @@ namespace API.Controllers
             _tokenService = tokenService;
         }
 
+        // Регистрация
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-            // Check if the username already exists
             if (await UserExists(registerDto.Username))
-                return BadRequest("Username is taken");
+                return BadRequest("Имя пользователя уже занято");
 
-            // Create a new user with hashed password
             using var hmac = new HMACSHA512();
 
             var user = new AppUser
             {
                 UserName = registerDto.Username.ToLower(),
+                Email = registerDto.Email,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key
+                PasswordSalt = hmac.Key,
+                Role = "Customer" // Или другая роль по умолчанию
             };
 
             _context.Users.Add(user);
@@ -49,16 +51,15 @@ namespace API.Controllers
             };
         }
 
+        // Вход
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            // Retrieve the user from the database
             var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
 
             if (user == null)
-                return Unauthorized("Invalid username");
+                return Unauthorized("Неверное имя пользователя");
 
-            // Verify the password
             using var hmac = new HMACSHA512(user.PasswordSalt);
 
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
@@ -66,7 +67,7 @@ namespace API.Controllers
             for (int i = 0; i < computedHash.Length; i++)
             {
                 if (computedHash[i] != user.PasswordHash[i])
-                    return Unauthorized("Invalid password");
+                    return Unauthorized("Неверный пароль");
             }
 
             return new UserDto
@@ -76,7 +77,7 @@ namespace API.Controllers
             };
         }
 
-        // Helper method to check if a username already exists
+        // Проверка существования пользователя
         private async Task<bool> UserExists(string username)
         {
             return await _context.Users.AnyAsync(x => x.UserName == username.ToLower());
