@@ -8,34 +8,26 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace API.Services
 {
-    public class TokenService : ITokenService
-    {
-        private readonly SymmetricSecurityKey _key;
-
-        public TokenService(IConfiguration config)
-        {
-            var tokenKey = config["TokenKey"];
-            if (string.IsNullOrEmpty(tokenKey))
-            {
-                throw new ArgumentNullException(nameof(tokenKey), "TokenKey must be set in configuration.");
-            }
-
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
-        }
-
+   public class TokenService(IConfiguration config) : ITokenService
+    {        
         public string CreateToken(AppUser user)
         {
+            var tokenKey = config["TokenKey"] ?? throw new Exception("TokenKey must be set in configuration.");
+            if (tokenKey.Length < 64) throw new Exception("TokenKey must be at least 64 characters long.");
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
+
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
+                new Claim(ClaimTypes.NameIdentifier, user.UserName)
             };
 
-            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = creds
             };
 

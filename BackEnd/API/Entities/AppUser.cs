@@ -1,26 +1,22 @@
-using System;
 
 namespace API.Entities;
 
 public class AppUser
 {
     public int Id { get; set; }
-    public required string UserName { get; set; } // Логин
-    public string? Name { get; set; } // Имя
-    public string? Surname { get; set; } // Фамилия
-    public string? Role { get; set; }  // Роль
-    public required string Email { get; set; } // Электронная почта
-
-    public string? Headline { get; set; } // Заголовок
-
+    public required string UserName { get; set; }
+    public string? Name { get; set; } 
+    public string? Surname { get; set; } 
+    public string? Role { get; set; }
+    public required string Email { get; set; } 
+    public string? Headline { get; set; }
     public string? TwitterLink { get; set; }
     public string? LinkedInLink { get; set; }
     public string? Facebook { get; set; }
-    public string? YoutubeLink { get; set; } // Исправьте опечатку "YuotubeLink" на "YoutubeLink"
-
-    public string? Description { get; set; } // Описание
-    public string? PhoneNumber { get; set; } // Номер телефона
-    public DateTime? DateOfBirth { get; set; } // Дата рождения
-    public required byte[] PasswordHash { get; set; } // Хеш пароля
+    public string? YoutubeLink { get; set; }
+    public string? Description { get; set; } 
+    public string? PhoneNumber { get; set; } 
+    public DateTime? DateOfBirth { get; set; } 
+    public required byte[] PasswordHash { get; set; } 
     public required byte[] PasswordSalt { get; set; }
 }
