@@ -1,0 +1,23 @@
+[
+    {
+        "userName": "testuser1",
+        "email": "testuser1@example.com",
+        "name": "Test",
+        "surname": "User",
+        "role": "User",
+        "headline": "Software Developer",
+        "description": "A passionate developer.",
+        "phoneNumber": "123-456-7890",
+        "dateOfBirth": "2000-01-01",
+        "twitterLink": "https://twitter.com/testuser1",
+        "linkedinLink": "https://linkedin.com/in/testuser1",
+        "facebook": "https://facebook.com/testuser1",
+        "youtubeLink": "https://youtube.com/testuser1",
+        "Photos": [
+            {
+                "Url": "https://randomuser.me/api/portraits/men/12.jpg",
+                "IsMain": true
+            }
+        ]
+    }
+]
