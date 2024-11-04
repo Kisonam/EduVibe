@@ -13,10 +13,10 @@
         "linkedinLink": "https://linkedin.com/in/testuser1",
         "facebook": "https://facebook.com/testuser1",
         "youtubeLink": "https://youtube.com/testuser1",
-        "Photos": [
+        "photos": [
             {
-                "Url": "https://randomuser.me/api/portraits/men/12.jpg",
-                "IsMain": true
+                "url": "https://randomuser.me/api/portraits/men/12.jpg",
+                "isMain": true
             }
         ]
     }
