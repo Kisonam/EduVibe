@@ -1,12 +1,30 @@
 using System;
+using API.DTOs;
 using API.Entities;
 using API.Interfaces;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
 
-public class UserRepository(DataContext context) : IUserRepository
+public class UserRepository(DataContext context, IMapper mapper) : IUserRepository
 {
+    public async Task<MemberDto?> GetMemberAsync(string username)
+    {
+        return await context.Users
+        .Where(x => x.UserName == username)
+        .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
+        .SingleOrDefaultAsync();
+    }
+
+    public async Task<IEnumerable<MemberDto>> GetMembersAsync()
+    {
+       return await context.Users
+        .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
+        .ToListAsync();
+    }
+
     public async Task<AppUser?> GetUserByIdAsync(int id)
     {
         return await context.Users
@@ -19,18 +37,9 @@ public class UserRepository(DataContext context) : IUserRepository
         {
             throw new ArgumentException("Username cannot be null or empty", nameof(username));
         }
-        
-        try
-        {
-            return await context.Users
-            .Include(u => u.Photos)
-            .SingleOrDefaultAsync(x => x.UserName == username);
-        }
-        catch (Exception ex)
-        {
-            // Log the exception or handle it accordingly
-            throw new InvalidOperationException("An error occurred while retrieving the user", ex);
-        }
+        return await context.Users
+        .Include(u => u.Photos)
+        .SingleOrDefaultAsync(x => x.UserName == username);
     }
 
 
@@ -48,6 +57,6 @@ public class UserRepository(DataContext context) : IUserRepository
 
     public void Update(AppUser user)
     {
-       context.Entry(user).State = EntityState.Modified;
+        context.Entry(user).State = EntityState.Modified;
     }
 }

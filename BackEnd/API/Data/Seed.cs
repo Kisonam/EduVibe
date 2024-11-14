@@ -18,7 +18,7 @@ public class Seed
         var options = new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            Converters = { new DateOnlyJsonConverter() }  // Додаємо кастомний конвертер для DateOnly
+            Converters = { new DateOnlyJsonConverter() }  
         };
 
         // Десеріалізація користувачів з JSON
@@ -28,7 +28,6 @@ public class Seed
 
         foreach (var user in users)
         {
-            // Генерація хешу і солі для пароля
             using var hmac = new HMACSHA512();
             user.UserName = user.UserName.ToLower();
             user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$w0rd"));  // Використовуємо стандартний пароль
@@ -37,7 +36,7 @@ public class Seed
             // Додавання фотографій користувача
             foreach (var photo in user.Photos)
             {
-                photo.AppUserId = user.Id;  // Зв'язок з користувачем
+                photo.AppUserId = user.Id;  // Задаємо Id користувача
             }
 
             // Додавання користувача до контексту

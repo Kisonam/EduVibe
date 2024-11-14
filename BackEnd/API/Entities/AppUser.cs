@@ -23,9 +23,5 @@ public class AppUser
     public byte[] PasswordSalt { get; set; } = [];
     public ICollection<Photo> Photos { get; set; } = [];
 
-    public int GetAge()
-    {
-        return DateOfBirth.CalculateAge();
-    }
 }
 
