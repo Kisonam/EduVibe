@@ -1,0 +1,15 @@
+<app-nav-bar-main></app-nav-bar-main>
+
+<div class="login-form">
+  <h2>Войдите в свой аккаунт</h2>
+
+  <form (ngSubmit)="login()">
+    <div class="input-container">
+      <input [(ngModel)]="username" name="username" type="text" placeholder="Email или никнейм" required />
+    </div>
+    <div class="input-container">
+      <input [(ngModel)]="password" name="password" type="password" placeholder="Пароль" required />
+    </div>
+    <button type="submit" class="login-button">Войти</button>
+  </form>
+</div>

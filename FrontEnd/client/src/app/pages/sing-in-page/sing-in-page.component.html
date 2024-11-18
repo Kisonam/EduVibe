@@ -1,0 +1,19 @@
+<app-nav-bar-main></app-nav-bar-main>
+
+  <div class="sign-up-form">
+    <h2>Зарегистрируйтесь и начните учиться сегодня</h2>
+  
+    <form (ngSubmit)="register()">
+      <div class="input-container">
+        <input [(ngModel)]="username" name="username" type="text" placeholder="Никнейм" required />
+      </div>
+      <div class="input-container">
+        <input [(ngModel)]="email" name="email" type="email" placeholder="Email" required />
+      </div>
+      <div class="input-container">
+        <input [(ngModel)]="password" name="password" type="password" placeholder="Пароль" required />
+      </div>
+      <button type="submit" class="sign-up-button">Зарегистрироваться</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,86 @@
+[
+    {
+        "userName": "testuser1",
+        "email": "testuser1@example.com",
+        "name": "Test",
+        "surname": "User",
+        "role": "User",
+        "headline": "Software Developer",
+        "description": "A passionate developer.",
+        "phoneNumber": "123-456-7890",
+        "dateOfBirth": "2000-01-01",
+        "twitterLink": "https://twitter.com/testuser1",
+        "linkedinLink": "https://linkedin.com/in/testuser1",
+        "facebook": "https://facebook.com/testuser1",
+        "youtubeLink": "https://youtube.com/testuser1",
+        "photos": [
+            {
+                "url": "https://randomuser.me/api/portraits/men/12.jpg",
+                "isMain": true
+            }
+        ]
+    },
+    {
+        "userName": "testuser2",
+        "email": "testuser2@example.com",
+        "name": "Alex",
+        "surname": "Smith",
+        "role": "Admin",
+        "headline": "Data Analyst",
+        "description": "Experienced in data visualization and analytics.",
+        "phoneNumber": "987-654-3210",
+        "dateOfBirth": "1995-02-10",
+        "twitterLink": "https://twitter.com/testuser2",
+        "linkedinLink": "https://linkedin.com/in/testuser2",
+        "facebook": "https://facebook.com/testuser2",
+        "youtubeLink": "https://youtube.com/testuser2",
+        "photos": [
+            {
+                "url": "https://randomuser.me/api/portraits/women/30.jpg",
+                "isMain": true
+            }
+        ]
+    },    
+    {
+        "userName": "testuser3",
+        "email": "testuser3@example.com",
+        "name": "Maria",
+        "surname": "Johnson",
+        "role": "User",
+        "headline": "UX/UI Designer",
+        "description": "Crafting user-friendly and beautiful interfaces.",
+        "phoneNumber": "456-789-1234",
+        "dateOfBirth": "1990-05-15",
+        "twitterLink": "https://twitter.com/testuser3",
+        "linkedinLink": "https://linkedin.com/in/testuser3",
+        "facebook": "https://facebook.com/testuser3",
+        "youtubeLink": "https://youtube.com/testuser3",
+        "photos": [
+            {
+                "url": "https://randomuser.me/api/portraits/women/44.jpg",
+                "isMain": true
+            }
+        ]
+    },
+    {
+        "userName": "testuser4",
+        "email": "testuser4@example.com",
+        "name": "John",
+        "surname": "Doe",
+        "role": "Moderator",
+        "headline": "Project Manager",
+        "description": "Focused on successful project execution.",
+        "phoneNumber": "321-654-9870",
+        "dateOfBirth": "1988-11-25",
+        "twitterLink": "https://twitter.com/testuser4",
+        "linkedinLink": "https://linkedin.com/in/testuser4",
+        "facebook": "https://facebook.com/testuser4",
+        "youtubeLink": "https://youtube.com/testuser4",
+        "photos": [
+            {
+                "url": "https://randomuser.me/api/portraits/men/25.jpg",
+                "isMain": true
+            }
+        ]
+    }
+]

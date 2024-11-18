@@ -66,6 +66,7 @@ out-tsc/
 # Compiled JavaScript and TypeScript files
 *.js
 *.js.map
+appsettings.json
 
 # Compiled CSS
 *.css
@@ -120,3 +121,5 @@ Desktop.ini
 # System files
 *.DS_Store
 Thumbs.db
+
+appsettings.json

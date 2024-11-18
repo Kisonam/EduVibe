@@ -1,0 +1,47 @@
+.logo{
+    position:absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.test{
+    margin-top: 40vh;
+    margin-left: 40vw;
+}
+
+.intro-text{
+    
+    position:absolute;
+    top: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+.button{
+    position:absolute;
+    top: 650px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #7B586B;
+    border: px solid rgba(27, 31, 35, 0.15);
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #D4DBE2;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    list-style: none;
+    padding: 10px;
+    margin-left: 10px;
+    position: relative;
+    transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    word-wrap: break-word;
+}

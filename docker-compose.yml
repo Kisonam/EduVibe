@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./BackEnd
+      dockerfile: DockerFile  # Make sure the filename matches exactly
+    ports:
+      - "80:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development  # Set the environment if needed
+    volumes:
+      - ./BackEnd/API:/app/API  # Mount local directory to container
+    networks:
+      - mynetwork  # Use for connecting to other services
+
+networks:
+  mynetwork:
+    driver: bridge  # Using bridge network

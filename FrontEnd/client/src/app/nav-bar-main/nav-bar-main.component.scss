@@ -1,0 +1,177 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 2fr;
+  background-color: #453C41;
+  color: #D4DBE2;
+  padding: 10px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.navbar-brand {
+  grid-column: 1;
+  height: 40px;
+}
+
+:root {
+  --rad: .7rem;
+  --dur: .3s;
+  --color-dark: #2f2f2f;
+  --color-light: #fff;
+  --color-brand: #57bd84;
+  --font-fam: 'Lato', sans-serif;
+  --height: 5rem;
+  --btn-width: 6rem;
+  --bez: cubic-bezier(0, 0, 0.43, 1.49);
+}
+
+.navbar-search {
+  grid-column: 2;
+  width: 25vw;
+}
+.navbar-search {
+  position: relative;
+  width: 25vw;
+  background: #7B586B;
+  border-radius: 6px;
+}
+.navbar-search input {
+  height: 40px;
+  font-family: 'Raleway', sans-serif;
+  border: 0;
+  color: #1D0F0F;
+  font-size: 18px;
+  width: 100%;
+  background: #D4DBE2;
+  padding: 0 16px;
+  border-radius: 6px;
+  appearance: none;
+  transition: all 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  z-index: 1;
+  position: relative;
+}
+.navbar-search button {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10%;
+  height: 100%;
+  font-weight: bold;
+  background: #7B586B;
+  border-radius: 0 6px 6px 0;
+}
+.navbar-search input:not(:placeholder-shown) {
+  border-radius: 6px 0 0 6px;
+  width: calc(100% - 40px);
+  + button {
+    display: block;
+  }
+}
+.navbar-search label {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+.navbar-categories {
+  grid-column: 3;
+}
+
+.navbar-link{
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.1s;
+  &:hover {
+    opacity: 0.75;
+    cursor: pointer;
+  }
+  grid-column: 4;
+}
+
+.navbar-actions {
+    
+  grid-column: 5;
+  align-items: center;
+}
+.navbar-actions button {
+  appearance: none;
+  background-color: transparent;
+  border: px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #D4DBE2;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  list-style: none;
+  padding: 10px;
+  margin-left: 10px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+
+.navbar-actions button:hover {
+  background-color: #f3f4f644;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.navbar-actions button:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.navbar-actions button:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.navbar-actions button:focus {
+  outline: 1px transparent;
+}
+
+.navbar-actions button:before {
+  display: none;
+}
+
+.navbar-actions button:-webkit-details-marker {
+  display: none;
+}
+
+#sign-up-button {
+  background-color: #D4DBE2;
+  color: #453C41;
+  margin-left: 40px;
+  border: none;
+  outline: none;
+}
+#sign-up-button:hover {
+  background-color: #453C41;
+  color: #D4DBE2;
+  margin-left: 40px;
+  border: px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+}
