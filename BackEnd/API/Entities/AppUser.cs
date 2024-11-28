@@ -21,7 +21,7 @@ public class AppUser
     public DateOnly DateOfBirth { get; set; } 
     public byte[] PasswordHash { get; set; } = [];
     public byte[] PasswordSalt { get; set; } = [];
-    public ICollection<Photo> Photos { get; set; } = [];
+    public ICollection<Photo> Photos { get; set; }
 
 }
 

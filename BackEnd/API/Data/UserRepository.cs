@@ -31,12 +31,8 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
         .FindAsync(id);
     }
 
-    public async Task<AppUser?> GetUserByUsernameAsync(string username)
+    public async Task<AppUser> GetUserByUsernameAsync(string username)
     {
-        if (string.IsNullOrWhiteSpace(username))
-        {
-            throw new ArgumentException("Username cannot be null or empty", nameof(username));
-        }
         return await context.Users
         .Include(u => u.Photos)
         .SingleOrDefaultAsync(x => x.UserName == username);

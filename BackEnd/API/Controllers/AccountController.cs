@@ -6,10 +6,11 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using AutoMapper;
 
 namespace API.Controllers
 {
-    public class AccountController(DataContext context, ITokenService tokenService) : BaseApiController
+    public class AccountController(DataContext context, ITokenService tokenService, IMapper mapper) : BaseApiController
     {
         // POST: api/account/register
         [HttpPost("register")]
@@ -18,27 +19,24 @@ namespace API.Controllers
             if (await UserExists(registerDto.Username))
                 return BadRequest("Username already exists");
 
+            using var hmac = new HMACSHA512();
 
-            return Ok("Username created successfully");
-            // using var hmac = new HMACSHA512();
+            var user = mapper.Map<AppUser>(registerDto);
 
-            // var user = new AppUser
-            // {
-            //     UserName = registerDto.Username.ToLower(),
-            //     Email = registerDto.Email,
-            //     PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-            //     PasswordSalt = hmac.Key,
-            //     Role = "Customer" // Default role
-            // };
+            user.UserName = registerDto.Username.ToLower();
+            user.Email = registerDto.Email;
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+            user.PasswordSalt = hmac.Key;
 
-            // context.Users.Add(user);
-            // await context.SaveChangesAsync();
+            context.Users.Add(user);
+            await context.SaveChangesAsync();
 
-            // return new UserDto
-            // {
-            //     Username = user.UserName,
-            //     Token = tokenService.CreateToken(user)
-            // };
+            return new UserDto
+            {
+                Username = user.UserName,
+                Email = user.Email,
+                Token = tokenService.CreateToken(user)
+            };
         }
 
         // POST: api/account/login
@@ -56,6 +54,7 @@ namespace API.Controllers
             return new UserDto
             {
                 Username = user.UserName,
+                Email = user.Email,
                 Token = tokenService.CreateToken(user)
             };
         }
