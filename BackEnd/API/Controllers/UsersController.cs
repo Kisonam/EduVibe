@@ -19,6 +19,7 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
     public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
     {
         var users = await userRepository.GetMembersAsync();
+        
         return Ok(users);
     }
     // Get: api/users/{username}
@@ -99,4 +100,6 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
 
         return BadRequest("Failed to delete photo");
     }
+
+
 }
