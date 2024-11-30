@@ -25,17 +25,19 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
         .ToListAsync();
     }
 
-    public async Task<AppUser?> GetUserByIdAsync(int id)
+    public async Task<MemberDto> GetUserByIdAsync(int id)
     {
-        return await context.Users
-        .FindAsync(id);
+        return await context.Users.
+        ProjectTo<MemberDto>(mapper.ConfigurationProvider)
+        .FirstAsync(x => x.Id == id)
+        ?? throw new Exception("User not found");
     }
 
     public async Task<AppUser> GetUserByUsernameAsync(string username)
     {
         return await context.Users
         .Include(u => u.Photos)
-        .SingleOrDefaultAsync(x => x.UserName == username);
+        .SingleOrDefaultAsync(x => x.UserName == username) ?? throw new Exception("User not found");
     }
 
 

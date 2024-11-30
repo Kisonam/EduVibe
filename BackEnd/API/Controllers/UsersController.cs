@@ -6,13 +6,15 @@ using API.Entities;
 using API.Extensions;
 using API.Interfaces;
 using AutoMapper;
+using AutoMapper.Execution;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
 [Authorize]
-public class UsersController(IUserRepository userRepository, IMapper mapper, IPhotoSevice photoSevice) : BaseApiController
+public class UsersController(IUserRepository userRepository,
+ IMapper mapper, IPhotoSevice photoSevice) : BaseApiController
 {
     // Get: api/users
     [HttpGet]
@@ -31,24 +33,22 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
 
         return user;
     }
+   [HttpGet("{id:int}")]
+    public async Task<ActionResult<MemberDto>> GetUserByIdAsync(int id)
+    {
+        var user = await userRepository.GetUserByIdAsync(id);
+        if (user == null) return NotFound();
 
-
+        return user;
+    }
     [HttpPut]
     public async Task<ActionResult> UpdateUser(MemberUpdateDto member)
     {
-
         var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
-
         if (user == null) return BadRequest("User not found");
-
         mapper.Map(member, user);
-
-    
-
         if (await userRepository.SaveAllAsync()) return NoContent();
-
         return BadRequest("Failed to update user");
-
     }
 
     [HttpPost("add-photo")]
@@ -67,7 +67,10 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
             PublicId = result.PublicId
         };
 
-       user.Photos.Add(photo);
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+        user.Photos.Add(photo);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
         if (await userRepository.SaveAllAsync()) 
             return CreatedAtAction(nameof(GetUserByUsername),
@@ -85,7 +88,12 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
 
         if (user == null) return BadRequest("User cannot be deleted");
 
+        if (user.Photos == null)
+            return BadRequest("User has no photos");
+
         var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+
+        if (photo == null) return BadRequest();
 
         if (photo.IsMain || photo == null) return BadRequest("You cannot delete your main photo");
 
@@ -100,6 +108,4 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
 
         return BadRequest("Failed to delete photo");
     }
-
-
 }

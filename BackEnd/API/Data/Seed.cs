@@ -1,51 +1,41 @@
 using System.Security.Cryptography;
-using System.Text;
 using System.Text.Json;
 using API.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
 
 public class Seed
 {
-    public static async Task SeedUsers(DataContext context)
+    public static async Task SeedUsers(UserManager<AppUser> userManager)
     {
-        if (context.Users.Any()) return;
+        if (await userManager.Users.AnyAsync()) return;
 
-        // Читання даних з файлу JSON
         var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
 
-        // Налаштування десеріалізації з кастомним конвертером для DateOnly
         var options = new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             Converters = { new DateOnlyJsonConverter() }  
         };
 
-        // Десеріалізація користувачів з JSON
         var users = JsonSerializer.Deserialize<List<AppUser>>(userData, options);
 
         if (users == null) return;
 
         foreach (var user in users)
         {
-            using var hmac = new HMACSHA512();
-            user.UserName = user.UserName.ToLower();
-            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$w0rd"));  // Використовуємо стандартний пароль
-            user.PasswordSalt = hmac.Key;
 
-            // Додавання фотографій користувача
+            if (user.Photos == null)
+                return;
+
             foreach (var photo in user.Photos)
             {
-                photo.AppUserId = user.Id;  // Задаємо Id користувача
+                photo.AppUserId = user.Id; 
             }
-
-            // Додавання користувача до контексту
-            context.Users.Add(user);
+            user.UserName = user.UserName!.ToLower();
+            await userManager.CreateAsync(user, "Pa$$w0rd");
         }
-
-        // Збереження змін у базі
-        await context.SaveChangesAsync();
     }
-
-
 }

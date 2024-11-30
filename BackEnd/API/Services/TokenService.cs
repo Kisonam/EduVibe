@@ -17,6 +17,8 @@ namespace API.Services
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
 
+            if (user.UserName == null) throw new Exception("User must have a username.");
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.UserName)
