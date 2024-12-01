@@ -2,10 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
-using API.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
-using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 
@@ -45,7 +42,7 @@ namespace API.Controllers
             var user = await userManager.Users
                 .SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
 
-            if (user == null || user.UserName == null) 
+            if (user == null || user.UserName == null)
                 return Unauthorized("Incorrect username");
             
             var result = await userManager.CheckPasswordAsync(user, loginDto.Password);

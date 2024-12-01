@@ -7,6 +7,7 @@ using API.Extensions;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.Execution;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ public class UsersController(IUserRepository userRepository,
 {
     // Get: api/users
     [HttpGet]
+    [Authorize(Roles = "ADMIN")]
     public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
     {
         var users = await userRepository.GetMembersAsync();
