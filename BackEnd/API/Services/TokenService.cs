@@ -3,26 +3,34 @@ using System.Security.Claims;
 using System.Text;
 using API.Entities;
 using API.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API.Services
 {
-   public class TokenService(IConfiguration config) : ITokenService
+   public class TokenService(IConfiguration config, UserManager<AppUser> userManager) : ITokenService
     {        
-        public string CreateToken(AppUser user)
+        public async Task<string> CreateToken(AppUser user)
         {
-            var tokenKey = config["TokenKey"] ?? throw new Exception("TokenKey must be set in configuration.");
-            if (tokenKey.Length < 64) throw new Exception("TokenKey must be at least 64 characters long.");
+            var tokenKey = config["TokenKey"] 
+                ?? throw new Exception("TokenKey must be set in configuration.");
+
+            if (tokenKey.Length < 64) 
+                throw new Exception("TokenKey must be at least 64 characters long.");
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
 
-            if (user.UserName == null) throw new Exception("User must have a username.");
+            if (user.UserName == null) 
+                throw new Exception("User must have a username.");
 
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.UserName)
-            };
+            }; 
+
+            var roles = await userManager.GetRolesAsync(user);
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 

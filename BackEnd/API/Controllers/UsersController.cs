@@ -18,15 +18,16 @@ public class UsersController(IUserRepository userRepository,
  IMapper mapper, IPhotoSevice photoSevice) : BaseApiController
 {
     // Get: api/users
+    [Authorize(Roles = "Admin")]
     [HttpGet]
-    [Authorize(Roles = "ADMIN")]
     public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
     {
         var users = await userRepository.GetMembersAsync();
-        
+
         return Ok(users);
     }
     // Get: api/users/{username}
+    [Authorize(Roles = "Member")]
     [HttpGet("{username}")]
     public async Task<ActionResult<MemberDto>> GetUserByUsername(string username)
     {
@@ -35,7 +36,8 @@ public class UsersController(IUserRepository userRepository,
 
         return user;
     }
-   [HttpGet("{id:int}")]
+    [Authorize(Roles = "Member")]
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<MemberDto>> GetUserByIdAsync(int id)
     {
         var user = await userRepository.GetUserByIdAsync(id);
@@ -44,6 +46,7 @@ public class UsersController(IUserRepository userRepository,
         return user;
     }
     [HttpPut]
+    [Authorize(Roles = "Member")]
     public async Task<ActionResult> UpdateUser(MemberUpdateDto member)
     {
         var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
@@ -52,7 +55,7 @@ public class UsersController(IUserRepository userRepository,
         if (await userRepository.SaveAllAsync()) return NoContent();
         return BadRequest("Failed to update user");
     }
-
+    [Authorize(Roles = "Member")]
     [HttpPost("add-photo")]
     public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
     {
@@ -64,7 +67,8 @@ public class UsersController(IUserRepository userRepository,
 
         if (result == null) return BadRequest("Failed to upload photo");
 
-        var photo = new Photo{
+        var photo = new Photo
+        {
             Url = result.SecureUrl.AbsoluteUri,
             PublicId = result.PublicId
         };
@@ -74,15 +78,16 @@ public class UsersController(IUserRepository userRepository,
         user.Photos.Add(photo);
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
 
-        if (await userRepository.SaveAllAsync()) 
+        if (await userRepository.SaveAllAsync())
             return CreatedAtAction(nameof(GetUserByUsername),
-            new {username = user.UserName},
+            new { username = user.UserName },
             mapper.Map<PhotoDto>(photo));
 
-            
-            
+
+
         return BadRequest("Failed to add photo");
     }
+    [Authorize(Roles = "Member")]
     [HttpDelete("delete-photo/{photoId}")]
     public async Task<ActionResult> DeletePhoto(int photoId)
     {
